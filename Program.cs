@@ -6,7 +6,7 @@ namespace Klasser_og_nedarvning
     {
         static void Main(string[] args)
         {
-            spil();
+            Spil();
         }
         static void Scoretavle(int antal_deltagere, Player[] players)
         {
@@ -17,11 +17,13 @@ namespace Klasser_og_nedarvning
                 Console.WriteLine($"{players[i].Navn}: {players[i].Score}");
             }
         }
-        static void spil()
+        static void Spil()
         {
             Console.Write("Indtast antal deltagere i dette spil: ");
             int antal_deltagere = int.Parse(Console.ReadLine());
             Player[] players = new Player[antal_deltagere];
+
+
 
             bool vinder = false;
             for (int i = 0; i != antal_deltagere; i++)
@@ -29,6 +31,13 @@ namespace Klasser_og_nedarvning
                 Console.Write($"Indtast deltager {i + 1}: ");
                 Player player = new HumanPlayer(Console.ReadLine(), 0);
                 players[i] = player;
+            }
+            Console.Write("Indtast antal bots: ");
+            int antal_bots = int.Parse(Console.ReadLine());
+            Player[] bots = new Player[antal_bots];
+            for(int i = 0; i != antal_bots; i++)
+            {
+                bots[i] 
             }
 
             Console.WriteLine("Tryk \"Spacebar\" for at kaste terningen");
@@ -66,7 +75,7 @@ namespace Klasser_og_nedarvning
         {
 
         }
-        public void Play()
+        public override void Play()
         {
             int[] kast = new int[20];
             int sum = 0;
@@ -156,7 +165,7 @@ namespace Klasser_og_nedarvning
                 return navn;
             }
         }
-        public void Play()
+        public virtual void Play()
         {
 
         }
