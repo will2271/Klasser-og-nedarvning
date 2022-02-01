@@ -59,16 +59,12 @@ namespace Klasser_og_nedarvning
             Console.WriteLine("Spillet er slut.");
         }
     }
-    class HumanPlayer
+    class HumanPlayer : Player
     {
-        string navn;
-        int score;
-        static Random rnd = new Random();
-
-        public Player(string navn, int score)
+        public HumanPlayer(string navn, int score) :
+            base(navn, score)
         {
-            this.navn = navn;
-            this.score = score;
+
         }
         public void Play()
         {
@@ -81,12 +77,12 @@ namespace Klasser_og_nedarvning
                 kast[kast_index] = rnd.Next(1, 7);
                 if (kast[kast_index] == 1)
                 {
-                    Console.WriteLine($"{navn} slår: 1 ");
+                    Console.WriteLine($"{Navn} slår: 1 ");
                     runde = false;
                 }
                 else
                 {
-                    Console.Write($"{navn} slår:");
+                    Console.Write($"{Navn} slår:");
                     foreach (int nummer in kast)
                         if (nummer > 0)
                             Console.Write($" {nummer},");
@@ -95,7 +91,7 @@ namespace Klasser_og_nedarvning
                     if (userinput == ConsoleKey.Enter)
                     {
                         Console.WriteLine("");
-                        Console.Write($"{navn} vælger at stoppe, ");
+                        Console.Write($"{Navn} vælger at stoppe, ");
                         for (int i = 0; i != kast_index + 1; i++)
                             sum = sum + kast[i];
                         Console.Write("der bliver lagt ");
@@ -106,7 +102,7 @@ namespace Klasser_og_nedarvning
                             else
                                 Console.Write($" {kast[i2]} ");
                         }
-                        score = score + sum;
+                        Score = Score + sum;
                         return;
                     }
                     else if (userinput != ConsoleKey.Spacebar)
@@ -122,6 +118,26 @@ namespace Klasser_og_nedarvning
             }
         }
 
+    }
+    class ComputerPlayer : Player
+    {
+        public ComputerPlayer(string navn, int score) :
+            base(navn, score)
+        {
+
+        }
+    }
+    class Player
+    {
+
+        string navn;
+        int score;
+        protected Random rnd = new Random();
+        public Player(string navn, int score)
+        {
+            this.navn = navn;
+            this.score = score;
+        }
         public int Score
         {
             get
@@ -133,7 +149,6 @@ namespace Klasser_og_nedarvning
                 score = value;
             }
         }
-
         public string Navn
         {
             get
@@ -141,11 +156,7 @@ namespace Klasser_og_nedarvning
                 return navn;
             }
         }
-    }
-    class ComputerPlayer : Player
-    {
-        public ComputerPlayer(string navn, int score) :
-            base(navn, score)
+        public void Play()
         {
 
         }
