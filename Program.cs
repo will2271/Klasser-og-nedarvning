@@ -31,15 +31,14 @@ namespace Klasser_og_nedarvning
                 Console.Write($"Indtast deltager {i + 1}: ");
                 Player player = new HumanPlayer(Console.ReadLine(), 0);
                 players[i] = player;
+                if (i == antal_deltagere - 1)
+                {
+                    Console.Write("Indtast antal bots: ");
+                    int antal_bots = int.Parse(Console.ReadLine());
+                    Player[] bots = new Player[antal_bots];
+                    bots[i] = new HumanPlayer($"Bot{i}", 0);
+                }
             }
-            Console.Write("Indtast antal bots: ");
-            int antal_bots = int.Parse(Console.ReadLine());
-            Player[] bots = new Player[antal_bots];
-            for(int i = 0; i != antal_bots; i++)
-            {
-                bots[i] 
-            }
-
             Console.WriteLine("Tryk \"Spacebar\" for at kaste terningen");
             while (vinder == false)
             {
